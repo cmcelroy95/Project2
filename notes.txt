@@ -1,0 +1,5 @@
+use router to get images
+router.get(/images/:Filename; function(){
+var filename = req.params.Filename
+fs.readFile(...)
+})

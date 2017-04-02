@@ -25,8 +25,10 @@ function list(req, res, db) {
       res.statusCode = 500;
       res.end("Server Error")
     }
-    res.setHeader("Content-Type", "text/json");
-    res.end(JSON.stringify(projects));
+    else{
+      res.setHeader("Content-Type", "text/json");
+      res.end(JSON.stringify(projects));
+    }
   });
 }
 
@@ -133,7 +135,7 @@ function update(req, res, db) {
 
 /** @destroy
  * Removes the specified project from the database.
- * @param {http.incomingRequest} req - the request object 
+ * @param {http.incomingRequest} req - the request object
  * @param {http.serverResponse} res - the response object
  * @param {sqlite3.Database} db - the database object
  */
