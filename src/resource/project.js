@@ -19,7 +19,7 @@ module.exports = {
  * @param {sqlite3.Database} db - the database object
  */
 function list(req, res, db) {
-  db.all("SELECT * FROM projects", [], function(err, projects){
+  db.all("SELECT * FROM beers", [], function(err, projects){
     if(err) {
       console.error(err);
       res.statusCode = 500;
@@ -53,8 +53,8 @@ function create(req, res, db) {
 
   req.on("end", function() {
     var project = JSON.parse(body);
-    db.run("INSERT INTO projects (name, description, version, repository, license) VALUES (?,?,?,?,?)",
-      [project.name, project.description, project.version, project.repository, project.license],
+    db.run("INSERT INTO beers (name, description, imgName) VALUES (?,?,?)",
+      [project.name, project.description, project.imgName],
       function(err) {
         if(err) {
           console.error(err);
@@ -77,7 +77,7 @@ function create(req, res, db) {
  */
 function read(req, res, db) {
   var id = req.params.id;
-  db.get("SELECT * FROM projects WHERE id=?", [id], function(err, project){
+  db.get("SELECT * FROM beers WHERE id=?", [id], function(err, project){
     if(err) {
       console.error(err);
       res.statusCode = 500;
@@ -117,8 +117,8 @@ function update(req, res, db) {
 
   req.on("end", function() {
     var project = JSON.parse(body);
-    db.run("UPDATE projects SET name=?, description=?, version=?, repository=?, license=? WHERE id=?",
-      [project.name, project.description, project.version, project.repository, project.license, id],
+    db.run("UPDATE beers SET name=?, description=?, imgName=?, WHERE id=?",
+      [project.name, project.description, project.imgName, id],
       function(err) {
         if(err) {
           console.error(err);
@@ -136,12 +136,12 @@ function update(req, res, db) {
 /** @destroy
  * Removes the specified project from the database.
  * @param {http.incomingRequest} req - the request object
- * @param {http.serverResponse} res - the response object
+ * @param {http.serverSesponse} res - the response object
  * @param {sqlite3.Database} db - the database object
  */
 function destroy(req, res, db) {
   var id = req.params.id;
-  db.run("DELETE FROM projects WHERE id=?", [id], function(err) {
+  db.run("DELETE FROM beers WHERE id=?", [id], function(err) {
     if(err) {
       console.error(err);
       res.statusCode = 500;

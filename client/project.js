@@ -1,15 +1,23 @@
+var form = require('./form');
+
 module.exports = {
   list
 };
 
-/* Given a list of projects, create a table */
 function list(projects){
-  var table = $('<table>').addClass('table');
-  var head = $('<tr>').append('<th>Name</th>').appendTo(table);
-  projects.forEach(function(project) {
-    var row = $('<tr>').append(
-      $('<td>').text(project.name)
-    ).appendTo(table);
-  });
-  return table;
+  var body = $('<div>').addClass('body');
+  var list = $('<ul>').addClass('list'); //fix this
+  projects.forEach(function(project){
+    var link = $('<a>')
+      .text(project.name)
+      .attr('href', 'beers/' + project.id)
+      .on('click', function(e){
+        e.preventDefault();
+        loadProject('/beers/' + project.id);
+      })
+     .appendTo(list);
+   });
+  list.appendTo(body);
+  form.createForm().appendTo(body);
+  return body;
 }

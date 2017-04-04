@@ -2,8 +2,7 @@
 /* Main entry point */
 
 var project = require('./project');
-console.log("after require");
-$.get('/projects', function(projects){
+$.get('/beers', function(projects){
   $('body').html(project.list(projects));
 });
 
@@ -14,9 +13,7 @@ module.exports = {
 
 /* Given a list of projects, create a table */
 function list(projects){
-  console.log("in list method");
   var table = $('<table>').addClass('table');
-  var head = $('<tr>').append('<th>Name</th>').appendTo(table);
   projects.forEach(function(project) {
     var row = $('<tr>').append(
       $('<td>').text(project.name)

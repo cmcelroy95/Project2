@@ -15,7 +15,7 @@ fileserver.loadDir('public');
 
 // Define our routes
 var project = require('./src/resource/project');
-router.resource('/projects', project);
+router.resource('/beers', project);
 
 var server = new http.Server(function(req, res) {
   // Remove the leading '/' from the resource url
